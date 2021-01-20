@@ -10,7 +10,7 @@ function saveName(text) {
 }
 
 function handleSubmit(event) {
-  event.preventDefault();
+  event.preventDefault(); //자체적으로 탑재되어있는 기본동작을 막아줌
   const currentValue = input.value;
   paintGreeting(currentValue);
   saveName(currentValue);
@@ -19,19 +19,22 @@ function handleSubmit(event) {
 function askForName() {
   form.classList.add(SHOWING_CN);
   form.addEventListener("submit", handleSubmit);
+  //무언가를 form에 submit하면 handlesubmit 작동
 }
 
 function paintGreeting(text) {
-  form.classList.remove(SHOWING_CN);
+  form.classList.remove(SHOWING_CN); //입력칸은 감추기
   greeting.classList.add(SHOWING_CN);
-  greeting.innerText = `Hello ${text}`;
+  greeting.innerText = `Hello ${text}`; //글씨 출력
 }
-function loadName() {
+
+
+function loadName() { //localStorage에서 값 가져오는 기능
   const currentUser = localStorage.getItem(USER_LS);
-  if (currentUser === null) {
-    askForName();//he or she is not
+  if (currentUser === null) { 
+    askForName(); //currentUser 값이 없으면 = localStorage에 값이 없으면
   } else {
-    //he or she is
+    //he or she is 값이 있을때 작동
     paintGreeting(currentUser);
   }
 }
